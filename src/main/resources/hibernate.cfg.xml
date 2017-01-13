@@ -1,0 +1,23 @@
+<hibernate-configuration>
+    <session-factory>
+        <!--Database connection settings-->
+        <property name="connection.driver_class">org.h2.Driver</property>
+        <property name="connection.url">jdbc:h2:./data/items</property>
+
+        <!--SQL Dialect-->
+        <property name="dialect">org.hibernate.dialect.H2Dialect</property>
+
+        <!--Create the database schema on application startup-->
+        <!--hbm2ddl stands for Hibernate Mapping to Data Definition Language-->
+        <property name="hbm2ddl.auto">create</property>
+
+        <!--Names the annotated entity classes so Hibernate knows where the annotated @Entity classes are-->
+        <mapping class="com.cj.items.model.Items"></mapping>
+        <mapping class="com.cj.items.model.Users"></mapping>
+    </session-factory>
+</hibernate-configuration>
+
+        <!--org.hibernate.dialect.PostgreSQL95Dialect-->
+        <!--com.amazon.redshift.jdbc.Driver-->
+        <!--jdbc:redshift://discovery.redshift.bdap.cfahome.com:35439/cfa-->
+        <!--Amazon Redshift is based on postgres, so use latest postgres dialect available-->
