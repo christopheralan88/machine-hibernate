@@ -29,7 +29,9 @@ public class Items {
 
     @Column
     @NotNull
-    private int count;
+    private int quantity;
+
+    //private static final int MAX_COUNT = 10;
 
 
     //Default constructor for JPA
@@ -59,12 +61,16 @@ public class Items {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setQuantity(int count) {
+        this.quantity = count;
+    }
+
+    public static Object getMAX_COUNT() {
+        return 10; //MAX_COUNT;
     }
 
     @Override
@@ -73,11 +79,7 @@ public class Items {
                 "location='" + getLocation() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", price=" + getPrice() +
-                ", count=" + getCount() +
+                ", count=" + getQuantity() +
                 '}';
     }
-
-
-
-
 }

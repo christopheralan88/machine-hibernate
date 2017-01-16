@@ -3,23 +3,22 @@ package com.cj.items;
 /**
  * Created by Chris.Jones on 1/13/2017.
  */
+
+// holds methods and fields relating to user interface menu
 public enum Menu {
     INSERT,
     DELETE,
     SELECT,
-    UPDATE;
+    UPDATE,
+    REFILL,
+    QUIT;
 
-    public static void printMenuValues() {
-        System.out.println("What would you like to do?  /n");
-
-        //List<String> returnList = new ArrayList<>();
-        //for (com.cj.items.Menu value : com.cj.items.Menu.values()) {
-            //returnList.add(value.toString());
-        //}
-        //return returnList;
-
-        for (Menu value : Menu.values()) {
-            System.out.println(value.toString());
+    public static boolean matchesEnum(String input) {
+        for (Menu item : Menu.values()) {
+            if (item.toString().equals(input)) {
+                return true;
+            }
         }
+        return false;
     }
 }
