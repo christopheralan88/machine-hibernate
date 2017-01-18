@@ -45,38 +45,10 @@ public class Application {
         // instantiating the Connection object also instantiates a SessionFactory object - see Connection class for details
         connection = new Connection();
         session = connection.createSession(connection.getSessionFactory());
+        CustomerMenu.printCustomerMenu();
         //printManagerMenu();
-        ManagerMenu managerMenu = new ManagerMenu();
-        managerMenu.printManagerMenu();
-
-        //Configuration config = new Configuration();
-        //config.configure("hibernate.cfg.xml");
-        //SessionFactory sessionFactory = config.buildSessionFactory();
-
-        //Transaction transaction = session.beginTransaction();
-
-        //Items entry1 = new Items();
-        //entry1.setLocation("A1");
-        //entry1.setName("Doritos");
-        //entry1.setPrice(3);
-        //entry1.setCount(10);
-
-        //System.out.println(entry1);
-
-        //Items entry2 = new Items();
-        //entry2.setLocation("B1");
-        //entry2.setName("Fritos");
-        //entry2.setPrice(5);
-        //entry2.setCount(10);
-
-        //System.out.println(entry2);
-
-        //session.persist(entry1);
-        //session.persist(entry2);
-        //transaction.commit();
-
-        session.close(); //close session
-        System.exit(0); //close application
+        //ManagerMenu managerMenu = new ManagerMenu();
+        //managerMenu.printManagerMenu();
     }
 
     private static void  printManagerMenu() {
@@ -87,7 +59,7 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.next();
         if (! Menu.matchesEnum(choice)) {
-            System.out.println("That is not a valid choice.%n");
+            System.out.println("That is not a valid choice.");
             printManagerMenu(); //starts method over again.
         }
 

@@ -37,6 +37,12 @@ public class Items {
     //Default constructor for JPA
     public Items() {}
 
+    public Items(String location, String name, int price){
+        this.location = location;
+        this.name = name;
+        this.price = price;
+    }
+
     public String getLocation() {
         return location;
     }

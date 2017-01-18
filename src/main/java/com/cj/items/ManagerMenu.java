@@ -55,8 +55,9 @@ public class ManagerMenu {
         }
 
         if (choice.equalsIgnoreCase("QUIT")) {
-            System.out.println("Have a good day %s!  /n");
-            //printCustomerMenu();
+            //TODO:  cj make the line below a printf function with the user's first name filling the placeholder.
+            System.out.println("Have a good day %s!");
+            CustomerMenu.printCustomerMenu();
         }
 
         printManagerMenu();

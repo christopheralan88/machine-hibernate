@@ -52,9 +52,9 @@ public class Connection {
     public void insertTableRecords(Session session) {
 
         // get table name from user
-        System.out.println("What table would you like to insert new records to?");
+        //System.out.println("What table would you like to insert new records to?");
         Scanner scanner = new Scanner(System.in);
-        String table = scanner.next();
+        //String table = scanner.next();
 
         // retrieve all table fields
         Field[] fields = Items.class.getDeclaredFields();
@@ -69,7 +69,6 @@ public class Connection {
         int quantity = scanner.nextInt();
 
         Transaction transaction = session.beginTransaction();
-        //Object entry1 = new table.valueOf();
         Items entry = new Items();
         entry.setLocation(location);
         entry.setName(name);
@@ -85,20 +84,23 @@ public class Connection {
         Scanner scanner = new Scanner(System.in);
         String location = scanner.next();
 
-        //TODO:  cj put this IF block in a TRY-CATCH block to catch any exceptions with SQL
-        // check to make sure input starts with letter and has a length of 2
-        if (isLetter(location.charAt(0)) && location.length() == 2) {
-            // check to make sure input ends with int that is greater than 0 and less than 10
-            if (getNumericValue(location.charAt(1)) > 0 && getNumericValue(location.charAt(1)) < 10) {
-                Transaction transaction = session.beginTransaction();
-                String hql = "DELETE FROM items WHERE location = '" + location + "'";
-                Query query = session.createQuery(hql);
-                int result = query.executeUpdate();
-                transaction.commit();
-                System.out.printf("%d records deleted %n", result);
-            } else {
-                System.out.println("That is not a valid location.");
+        try {
+            // check to make sure input starts with letter and has a length of 2
+            if (isLetter(location.charAt(0)) && location.length() == 2) {
+                // check to make sure input ends with int that is greater than 0 and less than 10
+                if (getNumericValue(location.charAt(1)) > 0 && getNumericValue(location.charAt(1)) < 10) {
+                    Transaction transaction = session.beginTransaction();
+                    String hql = "DELETE FROM items WHERE location = '" + location + "'";
+                    Query query = session.createQuery(hql);
+                    int result = query.executeUpdate();
+                    transaction.commit();
+                    System.out.printf("%d records deleted %n", result);
+                } else {
+                    System.out.println("That is not a valid location.");
+                }
             }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
     }
 

@@ -9,7 +9,7 @@
 
         <!--Create the database schema on application startup-->
         <!--hbm2ddl stands for Hibernate Mapping to Data Definition Language-->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!--Names the annotated entity classes so Hibernate knows where the annotated @Entity classes are-->
         <mapping class="com.cj.items.model.Items"></mapping>
