@@ -15,7 +15,7 @@ public enum Menu {
 
     public static boolean matchesEnum(String input) {
         for (Menu item : Menu.values()) {
-            if (item.toString().equals(input)) {
+            if (item.toString().equalsIgnoreCase(input)) {
                 return true;
             }
         }

@@ -4,6 +4,8 @@ import com.cj.items.model.Items;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Scanner;
@@ -47,12 +49,14 @@ public enum CustomerMenu {
         if (customerChoice.equalsIgnoreCase("BUY")) {
             System.out.println("Here are the available vending machine items: ");
 
-            String hql = "SELECT new Items(location, name, price) FROM items WHERE quantity > 0 ORDER BY location";
-            Query query = Application.getSession().createQuery(hql);
-            List<Items> results = query.list(); //downcast from Object[] to List<Items>.  Suppressed unchecked warning.
-            for (int i = 0; i < results.size() - 1; i++) {
+            String hql = "FROM items WHERE quantity > 0 ORDER BY location";
+            TypedQuery<Items> query = Application.getSession().createQuery(hql, Items.class);
+            List<Items> results = query.getResultList();
+
+            System.out.println("Location     Name     Price");
+            for (int i = 0; i < results.size(); i++) {
                 Items item = results.get(i);
-                System.out.printf("%s     %s     %d", item.getLocation(), item.getName(),
+                System.out.printf("%s     %s     %d %n", item.getLocation(), item.getName(),
                        item.getPrice());
             }
 
