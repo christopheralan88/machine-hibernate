@@ -11,6 +11,7 @@ public enum Menu {
     SELECT,
     UPDATE,
     REFILL,
+    REPORT,
     QUIT;
 
     public static boolean matchesEnum(String input) {

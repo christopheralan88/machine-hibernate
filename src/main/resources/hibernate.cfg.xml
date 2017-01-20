@@ -14,6 +14,7 @@
         <!--Names the annotated entity classes so Hibernate knows where the annotated @Entity classes are-->
         <mapping class="com.cj.items.model.Items"></mapping>
         <mapping class="com.cj.items.model.Users"></mapping>
+        <mapping class="com.cj.items.model.Sales"></mapping>
     </session-factory>
 </hibernate-configuration>
 

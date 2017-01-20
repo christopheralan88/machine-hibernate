@@ -54,6 +54,10 @@ public class ManagerMenu {
             connection.refillAllItemsInMachine(session);
         }
 
+        if (choice.equalsIgnoreCase("REPORT")) {
+            connection.printSalesReport(session);
+        }
+
         if (choice.equalsIgnoreCase("QUIT")) {
             //TODO:  cj make the line below a printf function with the user's first name filling the placeholder.
             System.out.println("Have a good day %s!");

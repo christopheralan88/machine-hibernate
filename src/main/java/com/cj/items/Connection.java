@@ -1,12 +1,14 @@
 package com.cj.items;
 
 import com.cj.items.model.Items;
+import com.cj.items.model.Sales;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import javax.persistence.TypedQuery;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Objects;
@@ -111,6 +113,18 @@ public class Connection {
         int results = query.executeUpdate();
         transaction.commit();
         System.out.printf("%d records updated.  Each item now has %d items. %n", results, Items.getMAX_COUNT());
+    }
+
+    public void printSalesReport(Session session) {
+        String hql = "FROM sales ORDER BY time_of_purchase DESC";
+        TypedQuery<Sales> query = session.createQuery(hql, Sales.class);
+        List<Sales> results = query.getResultList();
+        System.out.println("Item Name     Price     Time Of Purchase");
+        for (int i = 0; i < results.size(); i++) {
+            Sales sale = results.get(i);
+            System.out.printf("%s     %s     %s %n", sale.getItemName(), sale.getPrice(),
+                    sale.getTimeOfPurchase());
+        }
     }
 
 }

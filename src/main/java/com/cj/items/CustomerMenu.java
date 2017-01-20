@@ -62,12 +62,18 @@ public enum CustomerMenu {
 
             Scanner sc = new Scanner(System.in);
             String location = sc.next();
-            String buyHql = "UPDATE items SET quantity = (SELECT quantity FROM items WHERE location =" +
+            String updateItemsHql = "UPDATE items SET quantity = (SELECT quantity FROM items WHERE location =" +
                     " '" + location + "') - 1 WHERE location = '" + location + "'";
+            String insertSaleHql = String.format("INSERT INTO sales VALUES (CURRENT_TIMESTAMP(),(SELECT name FROM items WHERE location = '%s'),(SELECT price FROM items WHERE location = '%s'))", location, location);
+
             try {
                 Transaction transaction = Application.getSession().beginTransaction();
-                Query buyQuery = Application.getSession().createQuery(buyHql);
-                buyQuery.executeUpdate();
+                Query updateItemQuery = Application.getSession().createQuery(updateItemsHql);
+                updateItemQuery.executeUpdate();
+                Query insertSaleQuery = Application.getSession().createSQLQuery(insertSaleHql);
+                //TODO:  cj change method name above to a non-depracted method.  We need to send a regular SQL string instead of ORM.
+                insertSaleQuery.executeUpdate();
+                Application.getSession().flush();
                 transaction.commit();
                 System.out.printf("Enjoy!");
             } catch (Exception ex) {

@@ -29,6 +29,7 @@ public class Items {
 
     @Column
     @NotNull
+
     private int quantity;
 
     //private static final int MAX_COUNT = 10;
