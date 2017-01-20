@@ -73,7 +73,7 @@ public enum CustomerMenu {
                 Query insertSaleQuery = Application.getSession().createSQLQuery(insertSaleHql);
                 //TODO:  cj change method name above to a non-depracted method.  We need to send a regular SQL string instead of ORM.
                 insertSaleQuery.executeUpdate();
-                Application.getSession().flush();
+                Application.getSession().flush(); //need in-memory database to be reset so that hql variable on line 52 is correct after purchase.
                 transaction.commit();
                 System.out.printf("Enjoy!");
             } catch (Exception ex) {
