@@ -29,6 +29,10 @@ public class Users {
     @NotNull
     private Boolean active;
 
+    @Column
+    @NotNull
+    private String password;
+
 
     //Default constructor for JPA
     public Users() {}
@@ -63,6 +67,14 @@ public class Users {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

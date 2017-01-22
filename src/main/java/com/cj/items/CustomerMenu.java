@@ -73,9 +73,11 @@ public enum CustomerMenu {
                 Query insertSaleQuery = Application.getSession().createSQLQuery(insertSaleHql);
                 //TODO:  cj change method name above to a non-depracted method.  We need to send a regular SQL string instead of ORM.
                 insertSaleQuery.executeUpdate();
-                Application.getSession().flush(); //need in-memory database to be reset so that hql variable on line 52 is correct after purchase.
+                Application.getSession().flush(); //need in-memory database to be refreshed so that hql variable on line 52 is correct after purchase.
+
+                
                 transaction.commit();
-                System.out.printf("Enjoy!");
+                System.out.println("Enjoy!");
             } catch (Exception ex) {
                 System.out.println("I'm sorry there was a problem vending your product.");
                 //TODO:  cj subtract money from funds to refund customer.
@@ -84,11 +86,11 @@ public enum CustomerMenu {
 
         if (customerChoice.equalsIgnoreCase("MANAGER")) {
             //TODO:  cj build sign in method to start printManagerMenu method.
-            ManagerMenu managerMenu = new ManagerMenu();
-            managerMenu.printManagerMenu();
-            //manager = new Manager("chris.jones", "chris1234", machine);
-            //System.out.printf("Welcome back %s!  %n", manager.getUsernameFirstName());
-            //printManagerMenu();
+            Application.setManagerMenu(ManagerMenu.ManagerMenuFactory());
+            if (Application.getManagerMenu() != null) {
+                System.out.println("Welcome back " + Application.getManagerMenu().getFirstName() + "!");
+                Application.getManagerMenu().printManagerMenu();
+            }
         }
 
         printCustomerMenu();
